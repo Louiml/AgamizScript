@@ -1,0 +1,204 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------ */
+/* Design tokens                                                       */
+/* ------------------------------------------------------------------ */
+
+:root {
+  --as-accent: 99 102 241;
+  --as-accent-soft: 79 70 229;
+}
+
+html[data-theme="light"],
+html.light {
+  --as-surface: 255 255 255;
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+.light {
+  color-scheme: light;
+}
+
+@layer base {
+  html {
+    height: 100%;
+    background: transparent;
+  }
+
+  body {
+    @apply h-full overflow-hidden bg-surface font-sans text-ink antialiased;
+    font-feature-settings: "kern", "liga";
+  }
+
+  #root {
+    @apply h-full;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(var(--as-line)) transparent;
+  }
+
+  ::selection {
+    background: rgb(var(--as-accent) / 0.25);
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply border border-white/10 bg-white/5 backdrop-blur-xl;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Editor typography                                                   */
+/* ------------------------------------------------------------------ */
+
+:root {
+  --script-font: "Courier Prime";
+}
+
+.script-surface {
+  font-family: var(--script-font), "Courier Prime", "Courier New", monospace;
+  font-size: var(--script-font-size, 16px);
+  line-height: var(--script-line-height, 1.45);
+}
+
+/* Tiptap rendered script element blocks */
+.ProseMirror > [data-element] {
+  position: relative;
+  min-height: 1.4em;
+}
+
+.ProseMirror[data-element="scene_heading"] {
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-block: 1.2em 0.2em;
+}
+
+/* Paragraph-level palette used per element in the editor (applied via div[data-element] children) */
+.script-element {
+  border-radius: 6px;
+  padding: 2px 8px;
+}
+
+.script-element::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: transparent;
+}
+
+[data-element="scene_heading"] {
+  font-weight: 600;
+}
+
+[data-element="character"] p {
+  font-weight: 700;
+}
+
+[data-element="parenthetical"] {
+  color: rgb(var(--as-ink-muted));
+}
+
+[data-element="transition"] {
+  text-align: right;
+  font-weight: 600;
+}
+
+[dir="rtl"] [data-element="transition"] {
+  text-align: left;
+}
+
+[data-element="dialogue"] {
+  padding-inline: 2rem;
+}
+
+[data-element="centered"] {
+  text-align: center;
+}
+
+[data-element="shot"] {
+  text-align: center;
+}
+
+/* livelier numbering for revisions */
+[data-revision="blue"] { background: rgb(59 130 246 / 0.12); }
+[data-revision="pink"] { background: rgb(236 72 153 / 0.12); }
+[data-revision="yellow"] { background: rgb(250 204 21 / 0.16) !important; }
+[data-revision="green"] { background: rgb(34 197 94 / 0.12); }
+[data-revision="salmon"] { background: rgb(251 113 133 / 0.12); }
+[data-revision="cherry"] { background: rgb(239 68 68 / 0.12); }
+[data-revision="goldenrod"] { background: rgb(234 179 8 / 0.14); }
+
+/* revision underlines */
+[data-revision] {
+  text-decoration-line: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+[data-revision="blue"] { text-decoration-color: #3b82f6; }
+[data-revision="pink"] { text-decoration-color: #ec4899; }
+[data-revision="yellow"] { text-decoration-color: #eab308; }
+[data-revision="green"] { text-decoration-color: #22c55e; }
+[data-revision="salmon"] { text-decoration-color: #fb7185; }
+[data-revision="cherry"] { text-decoration-color: #ef4444; }
+[data-revision="goldenrod"] { text-decoration-color: #eab308; }
+
+/* Placeholder styling */
+.ProseMirror p.is-empty::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: rgb(var(--as-ink-muted) / 0.5);
+  pointer-events: none;
+  height: 0;
+}
+
+[dir="rtl"] .ProseMirror p.is-empty::before {
+  float: right;
+}
+
+/* Focus / zen mode */
+body.focus-mode {
+  background: rgb(var(--as-surface));
+}
+
+body.focus-mode #root > div {
+  transition: all 0.3s ease;
+}
+
+/* Hide window chrome in focus mode via shell */
+body.focus-mode .focus-chrome-only {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Cursor caret */
+.ProseMirror .ProseMirror-selectednode {
+  outline: 2px solid rgb(var(--as-accent) / 0.4);
+}
+
+/* Subtle entrance used around workspace */
+input, textarea, select {
+  scrollbar-width: thin;
+}
+
+/* Prevent scroll jumps in paper */
+.script-paper-smooth-scroll {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
