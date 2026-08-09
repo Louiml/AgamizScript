@@ -1,0 +1,25 @@
+[package]
+name = "agamiz-script"
+version = "0.1.0"
+description = "Agamiz Script — screenplay, manuscript & subtitle suite"
+authors = ["Agamiz"]
+edition = "2021"
+
+[lib]
+name = "agamiz_script_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-dialog = "2"
+tauri-plugin-fs = "2"
+tauri-plugin-os = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[features]
+# Tauri v2.0 uses these to declare a tray-icon feature set when building on macOS/Linux
+custom-protocol = ["tauri/custom-protocol"]
