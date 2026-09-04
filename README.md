@@ -5,7 +5,7 @@
 Ad desktop app for writing screenplays, manuscripts, and subtitles — with AI assistance, revision tracking, and industry-standard formatting.
 
 [![Platform](https://img.shields.io/badge/Platform-WindowsOS%20%7C%20Linux-blue?style=for-the-badge)](https://github.com/Louiml/AgamizScript)
-[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
+[![License](https://img.shields.io/badge/License-Apache-green?style=for-the-badge)](LICENSE)
 
 ---
 
